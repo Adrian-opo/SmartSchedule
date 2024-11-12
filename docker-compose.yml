@@ -1,0 +1,6 @@
+﻿services:
+  smartschedule:
+    image: smartschedule
+    build:
+      context: .
+      dockerfile: SmartSchedule/Dockerfile
