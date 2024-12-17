@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartSchedule.Models
@@ -27,5 +28,7 @@ namespace SmartSchedule.Models
 
         [Column("password")]
         public string Password { get; set; }
+
+        public ICollection<UserTeam> UserTeams { get; set; }
     }
 }
