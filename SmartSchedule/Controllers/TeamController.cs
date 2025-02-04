@@ -10,9 +10,9 @@ namespace SmartSchedule.Controllers
     [Route("team")]
     public class TeamController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly SmartScheduleContext _context;
 
-        public TeamController(AppDbContext context)
+        public TeamController(SmartScheduleContext context)
         {
             _context = context;
         }

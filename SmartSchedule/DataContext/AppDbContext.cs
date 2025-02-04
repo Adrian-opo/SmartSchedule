@@ -1,10 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSchedule.Models;
 
-namespace SmartSchedule.Data
+namespace SmartSchedule.DataContext
 {
     public class SmartScheduleContext : DbContext
     {
+        public SmartScheduleContext(DbContextOptions<SmartScheduleContext> options) 
+            : base(options)
+        {
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Functionary> Functionaries { get; set; }

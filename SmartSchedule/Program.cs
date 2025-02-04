@@ -15,7 +15,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Get string connection from appsettings.json and add to class AppDbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<SmartScheduleContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 

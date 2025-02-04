@@ -10,9 +10,9 @@ namespace SmartSchedule.Controllers
     [Route("user")]
     public class UserController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly SmartScheduleContext _context;
 
-        public UserController(AppDbContext context)
+        public UserController(SmartScheduleContext context)
         {
             _context = context;
         }

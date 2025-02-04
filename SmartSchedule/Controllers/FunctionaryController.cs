@@ -11,9 +11,9 @@ namespace SmartSchedule.Controllers
 
     public class FunctionaryController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly SmartScheduleContext _context;
 
-        public FunctionaryController(AppDbContext context)
+        public FunctionaryController(SmartScheduleContext context)
         {
             _context = context;
         }
