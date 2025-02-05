@@ -25,4 +25,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Models\Functionary.cs" />
+    </ItemGroup>
+
 </Project>

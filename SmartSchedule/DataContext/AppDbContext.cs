@@ -12,25 +12,33 @@ namespace SmartSchedule.DataContext
 
         public DbSet<User> Users { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<Functionary> Functionaries { get; set; }
-        public DbSet<UserTeam> UserTeams { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Member> Members { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<UserTeam>()
-                .HasKey(ut => new { ut.UserId, ut.TeamId });
+            modelBuilder.Entity<Member>()
+                .HasKey(m => m.Id);
 
-            modelBuilder.Entity<UserTeam>()
-                .HasOne(ut => ut.User)
-                .WithMany(u => u.UserTeams)
-                .HasForeignKey(ut => ut.UserId);
+            modelBuilder.Entity<Member>()
+                .HasOne(m => m.User)
+                .WithMany(u => u.Members)
+                .HasForeignKey(m => m.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<UserTeam>()
-                .HasOne(ut => ut.Team)
-                .WithMany(t => t.UserTeams)
-                .HasForeignKey(ut => ut.TeamId);
+            modelBuilder.Entity<Member>()
+                .HasOne(m => m.Team)
+                .WithMany(t => t.Members)
+                .HasForeignKey(m => m.TeamId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Member>()
+                .HasOne(m => m.Role)
+                .WithMany(r => r.Members)
+                .HasForeignKey(m => m.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

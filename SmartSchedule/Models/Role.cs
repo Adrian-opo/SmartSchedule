@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartSchedule.Models
 {
-    [Table("team")]
-    public class Team
+    [Table("role")]
+    public class Role
     {
         [Key]
         [Column("id")]

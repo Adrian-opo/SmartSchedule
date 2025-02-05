@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,7 +29,7 @@ namespace SmartSchedule.Models
 
         [Column("password")]
         public string Password { get; set; }
-
-        public ICollection<UserTeam> UserTeams { get; set; }
+        
+        public virtual ICollection<Member> Members { get; set; } = new List<Member>();
     }
 }
