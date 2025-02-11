@@ -37,6 +37,15 @@ CREATE TABLE member (
     FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 
+-- Tabela de  (Assignment)
+CREATE TABLE assignment (
+   id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+   name VARCHAR(100) NOT NULL,
+   description TEXT
+);
+
+
+
 -- Inserts para a tabela users
 INSERT INTO users (name, cpf, email, cellphone, username, password) VALUES
     ('John Doe', '12345678901', 'john.doe@example.com', '1234567890', 'johndoe', 'password123'),
@@ -57,5 +66,8 @@ INSERT INTO member (user_id, team_id, role_id) VALUES
     (1, 1, 1),  -- John Doe como Developer na Development Team
     (2, 2, 2);  -- Jane Smith como Manager na Marketing Team
 
--- Selecionar todos os usuários
-SELECT * FROM users;
+
+-- Inserts para a tabela assignment
+INSERT INTO assignment (name, description) VALUES
+    ('Task 1', 'Task 1 Description'),
+    ('Task 2', 'Task 2 Description');

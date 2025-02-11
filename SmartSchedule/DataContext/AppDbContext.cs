@@ -14,6 +14,7 @@ namespace SmartSchedule.DataContext
         public DbSet<Team> Teams { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Member> Members { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
