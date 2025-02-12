@@ -16,6 +16,7 @@ namespace SmartSchedule.DataContext
         public DbSet<Member> Members { get; set; }
         public DbSet<Assignment> Assignments { get; set; }
         public DbSet<Scheduled> Scheduleds { get; set; }
+        public DbSet<Assigned> Assigned { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +42,22 @@ namespace SmartSchedule.DataContext
                 .WithMany(r => r.Members)
                 .HasForeignKey(m => m.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Assigned>()
+                .HasKey(a => a.Id);
+
+            modelBuilder.Entity<Assigned>()
+                .HasOne(a => a.Member)
+                .WithMany(m => m.AssignedTasks)
+                .HasForeignKey(a => a.MemberId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Assigned>()
+                .HasOne(a => a.Assignment)
+                .WithMany(asg => asg.AssignedMembers)
+                .HasForeignKey(a => a.AssignmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

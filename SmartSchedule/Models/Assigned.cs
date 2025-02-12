@@ -8,7 +8,6 @@ namespace SmartSchedule.Models;
 
 public class Assigned
 {
-    //id, member_id, assignment_id,
     [Key]
     [Column("id")]
     public int Id { get; set; }
