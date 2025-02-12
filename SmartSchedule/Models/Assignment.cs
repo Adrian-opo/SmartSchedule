@@ -16,5 +16,7 @@ namespace SmartSchedule.Models
         [Column("description")]
         public string Description { get; set; }
         
+        public ICollection<Assigned> AssignedMembers { get; set; } = new List<Assigned>();
+        
     }
 }
