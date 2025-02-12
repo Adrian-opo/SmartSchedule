@@ -44,7 +44,13 @@ CREATE TABLE assignment (
    description TEXT
 );
 
-
+CREATE TABLE scheduled (
+	id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    start DATE NOT NULL,
+    end DATE
+);
 
 -- Inserts para a tabela users
 INSERT INTO users (name, cpf, email, cellphone, username, password) VALUES
@@ -66,8 +72,11 @@ INSERT INTO member (user_id, team_id, role_id) VALUES
     (1, 1, 1),  -- John Doe como Developer na Development Team
     (2, 2, 2);  -- Jane Smith como Manager na Marketing Team
 
-
 -- Inserts para a tabela assignment
 INSERT INTO assignment (name, description) VALUES
     ('Task 1', 'Task 1 Description'),
     ('Task 2', 'Task 2 Description');
+
+-- Insert para a tabela scheduled
+INSERT INTO scheduled (name, description, start) VALUES
+	('BUG no BD', 'Banco de Dados', '2025-02-12');
