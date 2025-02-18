@@ -25,6 +25,6 @@ namespace SmartSchedule.Models
         public virtual Team Team { get; set; }
         public virtual Role Role { get; set; }
         
-        public ICollection<Assigned> AssignedTasks { get; set; } = new List<Assigned>();
+        public ICollection<Assigned> Assigneds { get; set; } = new List<Assigned>();
     }
 }

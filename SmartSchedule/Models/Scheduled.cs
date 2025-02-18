@@ -21,5 +21,9 @@ namespace SmartSchedule.Models
         
         [Column("end")]
         public DateTime End { get; set; }
+        
+        
+        public ICollection<Assigned> Assigneds { get; set; } = new List<Assigned>();
+
     }
 }

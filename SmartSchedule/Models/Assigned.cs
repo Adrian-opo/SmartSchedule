@@ -18,6 +18,12 @@ public class Assigned
     [Column("assignment_id")]
     public int AssignmentId { get; set; }
     
+    [Column("scheduled_id")]
+    public int ScheduledId { get; set; }
+    
     public virtual Member Member { get; set; }
     public virtual Assignment Assignment { get; set; }
+    
+    public virtual Scheduled Scheduled { get; set; }
+
 }

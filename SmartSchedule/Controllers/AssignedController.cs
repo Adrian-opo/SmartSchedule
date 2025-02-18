@@ -26,7 +26,7 @@ namespace SmartSchedule.Controllers
             }
             catch (Exception)
             {
-                return Problem("Unexpected error occurred while fetching assignments", null, 500);
+                return Problem("Erro Inesperado ao buscar tarefas", null, 500);
             }
         }
 
@@ -44,7 +44,7 @@ namespace SmartSchedule.Controllers
             }
             catch (Exception)
             {
-                return Problem("Unexpected error occurred while fetching the assignment", null, 500);
+                return Problem("Erro Inesperado ao buscar tarefa", null, 500);
             }
         }
 
@@ -64,7 +64,7 @@ namespace SmartSchedule.Controllers
             }
             catch (Exception)
             {
-                return Problem("Unexpected error occurred while creating the assignment", null, 500);
+                return Problem("Erro Inesperado ao criar Tafera", null, 500);
             }
         }
 
@@ -93,7 +93,7 @@ namespace SmartSchedule.Controllers
             }
             catch (Exception)
             {
-                return Problem("Unexpected error occurred while updating the assignment", null, 500);
+                return Problem("Erro inesperado ao atualizar tarefa", null, 500);
             }
         }
 

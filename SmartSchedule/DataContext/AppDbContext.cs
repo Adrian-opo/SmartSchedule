@@ -48,16 +48,21 @@ namespace SmartSchedule.DataContext
 
             modelBuilder.Entity<Assigned>()
                 .HasOne(a => a.Member)
-                .WithMany(m => m.AssignedTasks)
+                .WithMany(m => m.Assigneds)
                 .HasForeignKey(a => a.MemberId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Assigned>()
                 .HasOne(a => a.Assignment)
-                .WithMany(asg => asg.AssignedMembers)
+                .WithMany(asg => asg.Assigneds)
                 .HasForeignKey(a => a.AssignmentId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-        }
+            
+            
+            modelBuilder.Entity<Assigned>()
+                .HasOne(a => a.Scheduled)
+                .WithMany(s => s.Assigneds)
+                .HasForeignKey(a => a.ScheduledId)
+                .OnDelete(DeleteBehavior.Cascade);        }
     }
 }

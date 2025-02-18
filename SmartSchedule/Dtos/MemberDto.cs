@@ -29,5 +29,6 @@ namespace SmartSchedule.Dtos
 
     public class MemberUpdateDto : MemberCreateDto
     {
+        
     }
 }
