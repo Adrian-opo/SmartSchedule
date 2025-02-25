@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using SmartSchedule.Dtos;
 using SmartSchedule.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace SmartSchedule.Controllers
 {
     [ApiController]
     [Route("scheduled")]
+    [Authorize]
     public class ScheduledController : Controller
     {
         private readonly SmartScheduleContext _context;

@@ -1,4 +1,5 @@
-﻿using SmartSchedule.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using SmartSchedule.Dtos;
 using SmartSchedule.Models;
 using Microsoft.AspNetCore.Mvc;
 using SmartSchedule.DataContext;
@@ -8,6 +9,7 @@ namespace SmartSchedule.Controllers
 {
     [ApiController]
     [Route("team")]
+    [Authorize]
     public class TeamController : Controller
     {
         private readonly SmartScheduleContext _context;

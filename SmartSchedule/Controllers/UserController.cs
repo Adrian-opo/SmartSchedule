@@ -1,8 +1,10 @@
-﻿using SmartSchedule.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using SmartSchedule.Dtos;
 using SmartSchedule.Models;
 using Microsoft.AspNetCore.Mvc;
 using SmartSchedule.DataContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace SmartSchedule.Controllers
 {
@@ -11,19 +13,22 @@ namespace SmartSchedule.Controllers
     public class UserController : Controller
     {
         private readonly SmartScheduleContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserController(SmartScheduleContext context)
+        public UserController(SmartScheduleContext context, IPasswordHasher<User> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             try
             {
                 var users = await _context.Users.ToListAsync();
-                
+
                 return Ok(users);
             }
             catch (Exception)
@@ -34,17 +39,18 @@ namespace SmartSchedule.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             try
             {
                 var user = await _context.Users.FindAsync(id);
-                
+
                 if (user is null)
                 {
                     return NotFound($"Não encontrado usuário para o id: {id}!");
                 }
-                
+
                 return Ok(user);
             }
             catch (Exception)
@@ -73,6 +79,8 @@ namespace SmartSchedule.Controllers
                     Password = dto.Password
                 };
 
+                user.Password = _passwordHasher.HashPassword(user, dto.Password);
+
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
@@ -85,6 +93,7 @@ namespace SmartSchedule.Controllers
         }
 
         [HttpPatch("{id}")]
+        [Authorize]
         public async Task<IActionResult> Patch(int id, [FromBody] UserUpdateDto dto)
         {
             if (dto is null)
@@ -108,6 +117,11 @@ namespace SmartSchedule.Controllers
                 user.Username = dto.Username ?? user.Username;
                 user.Password = dto.Password ?? user.Password;
 
+                user.Password = _passwordHasher.HashPassword(user, user.Password);
+
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
                 await _context.SaveChangesAsync();
                 return Ok(user);
             }
@@ -118,6 +132,7 @@ namespace SmartSchedule.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             try

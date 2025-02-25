@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using SmartSchedule.Dtos;
 using SmartSchedule.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace SmartSchedule.Controllers
 {
     [ApiController]
     [Route("member")]
+    [Authorize]
     public class MemberController : Controller
     {
         private readonly SmartScheduleContext _context;
