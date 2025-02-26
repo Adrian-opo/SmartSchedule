@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartSchedule.Models
 {
-    [Table("user")]
+    [Table("users")]
     public class User
     {
         [Key]

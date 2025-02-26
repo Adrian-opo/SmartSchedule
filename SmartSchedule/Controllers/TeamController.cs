@@ -51,6 +51,40 @@ namespace SmartSchedule.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{id}/members")]
+        public async Task<IActionResult> GetTeamMembers(int id)
+        {
+            try
+            {
+                var team = await _context.Teams
+                    .Include(t => t.Members)
+                    .ThenInclude(m => m.User)
+                  //  .ThenInclude(u => u.Role)
+                    .FirstOrDefaultAsync(t => t.Id == id);
+
+                if (team is null)
+                {
+                    return NotFound($"Não encontrado time para o id: {id}!");
+                }
+
+                var members = team.Members.Select(m => new
+                {
+                    UserId = m.User?.Id,
+                    UserName = m.User?.Name,
+                    UserEmail = m.User?.Email,
+                    UserUsername = m.User?.Username,
+                }).ToList();
+
+                return Ok(members);
+            }
+            catch (Exception e)
+            {
+                return Problem("Erro inesperado ao buscar os membros do time: " + e.Message, null, 500);
+            }
+        }
+        
+        
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TeamCreateDto dto)
         {
