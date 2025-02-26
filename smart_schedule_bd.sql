@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS smart_schedule_db;  
 CREATE DATABASE IF NOT EXISTS smart_schedule_db;
 USE smart_schedule_db;
 
@@ -91,8 +92,9 @@ INSERT INTO assignment (name, description, due_date) VALUES
                                                          ('Task 2', 'Descrição da Task 2', '2025-02-20');
 
 -- Inserts para a tabela scheduled
-INSERT INTO scheduled (name, description, start) VALUES
-    ('BUG no BD', 'Banco de Dados', '2025-02-12');
+INSERT INTO scheduled (name, description, start, end) VALUES
+                                                        ('Sprint 1', 'Descrição do Sprint 1', '2025-02-01', '2025-02-15'),
+                                                        ('Sprint 2', 'Descrição do Sprint 2', '2025-02-16', '2025-02-28');
 
 -- Inserts para a tabela assigned
 INSERT INTO assigned (member_id, assignment_id, scheduled_id) VALUES

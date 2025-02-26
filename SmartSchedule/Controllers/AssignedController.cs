@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartSchedule.Models;
 using SmartSchedule.DataContext;
 using Microsoft.EntityFrameworkCore;
+using SmartSchedule.Dtos;
 
 namespace SmartSchedule.Controllers
 {
@@ -23,9 +24,41 @@ namespace SmartSchedule.Controllers
         {
             try
             {
-                var assigned = await _context.Assigned.ToListAsync();
-                return Ok(assigned);
-            }
+                var assigned = await _context.Assigned
+                    .Include(a => a.Member)
+                    .ThenInclude(m => m.User)
+                    .Include(a => a.Assignment)
+                    .Include(a => a.Scheduled).Include(assigned => assigned.Member).ThenInclude(member => member.Team)
+                    .ToListAsync();
+                
+                var assignedDto = assigned.Select(a => new AssignedDto
+                {
+                    Id = a.Id,
+                    Member = a.Member != null ? new MemberDto
+                    {
+                        Id = a.Member.Id,
+                        UserName = a.Member.User != null ? a.Member.User.Name : "Usuário Desconhecido",
+                        TeamName = a.Member.Team != null ? a.Member.Team.Name : "Time Desconhecido"
+                        
+                    } : null, // Se Member for null, retorna null
+
+                    Assignment = a.Assignment != null ? new AssignmentDto
+                    {
+                        Id = a.Assignment.Id,
+                        Name = a.Assignment.Name
+                    } : null, // Se Assignment for null, retorna null
+
+                    Scheduled = a.Scheduled != null ? new ScheduledDto
+                    {
+                        Id = a.Scheduled.Id,
+                        Name = a.Scheduled.Name,
+                        Start = a.Scheduled.Start,
+                        End = a.Scheduled.End
+                    } : null // Se Scheduled for null, retorna null
+                }).ToList();
+                
+                return Ok(assignedDto);
+            }   
             catch (Exception)
             {
                 return Problem("Erro Inesperado ao buscar tarefas", null, 500);
