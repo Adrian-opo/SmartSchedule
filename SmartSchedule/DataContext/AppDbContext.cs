@@ -63,6 +63,7 @@ namespace SmartSchedule.DataContext
                 .HasOne(a => a.Scheduled)
                 .WithMany(s => s.Assigneds)
                 .HasForeignKey(a => a.ScheduledId)
-                .OnDelete(DeleteBehavior.Cascade);        }
+                .OnDelete(DeleteBehavior.Cascade);       
+        }
     }
 }
